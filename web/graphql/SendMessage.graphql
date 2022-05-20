@@ -1,0 +1,3 @@
+mutation SendMessage($username: String!, $message: String!) {
+  SendMessage(username: $username, message: $message)
+}
