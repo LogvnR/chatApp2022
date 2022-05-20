@@ -88,7 +88,7 @@ export type MessagesSubscriptionHookResult = ReturnType<typeof useMessagesSubscr
 export type MessagesSubscriptionResult = Apollo.SubscriptionResult<MessagesSubscription>;
 export const SendMessageDocument = gql`
     mutation SendMessage($username: String!, $message: String!) {
-  SendMessage(username: "", message: $message)
+  SendMessage(username: $username, message: $message)
 }
     `;
 export type SendMessageMutationFn = Apollo.MutationFunction<SendMessageMutation, SendMessageMutationVariables>;
