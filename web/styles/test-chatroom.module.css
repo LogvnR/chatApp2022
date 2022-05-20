@@ -1,0 +1,28 @@
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+.self {
+  display: flex;
+  justify-content: end;
+}
+
+.message {
+  margin: 8px 0px;
+}
+
+.loading {
+  max-width: 700px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
+.loading__header {
+  text-align: center;
+}
+
+.error {
+  color: rgb(210, 64, 64);
+}
