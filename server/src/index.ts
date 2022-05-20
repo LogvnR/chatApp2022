@@ -16,6 +16,7 @@ async function main() {
     graphiql: {
       subscriptionsProtocol: "WS",
     },
+    hostname: "localhost",
   });
 
   /* 
