@@ -1,12 +1,17 @@
-import { extendType, list, nonNull, objectType } from "nexus";
-import { pubSub } from "..";
+import { extendType, nonNull, objectType } from "nexus";
+import { pubsub } from "..";
 
 interface IMessage {
   sender: string;
   message: string;
 }
 
-let messages: IMessage[] = [{ sender: "hello", message: "world" }];
+let messages: IMessage[] = [
+  {
+    sender: "Server",
+    message: "Welcome to the chat app. Feel free to start chatting :)",
+  },
+];
 
 export const message = objectType({
   name: "Message",
@@ -30,7 +35,7 @@ export const sendMessageMutation = extendType({
           message,
         });
 
-        pubSub.publish("messages", messages);
+        pubsub.publish("messages", messages);
 
         return true;
       },
@@ -45,9 +50,9 @@ export const messageSubscription = extendType({
       type: "Message",
       subscribe: () => {
         setTimeout(() => {
-          pubSub.publish("messages", messages);
+          pubsub.publish("messages", messages);
         }, 0);
-        return pubSub.subscribe("messages");
+        return pubsub.subscribe("messages");
       },
       resolve: async (payload) => {
         return messages as any;
