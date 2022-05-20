@@ -18,8 +18,9 @@ Fully working graphql custom subscription hooks
       {data?.MessageSubscription?.map((message) => {
         return (
           <div>
-            <div>{message?.sender}</div>
-            <div> {message?.message} </div>
+            <div>
+              <b>{message?.sender}:</b> {message?.message}
+            </div>
           </div>
         );
       })}
