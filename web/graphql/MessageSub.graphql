@@ -1,4 +1,4 @@
-subscription MessageSubscription {
+subscription Messages {
   MessageSubscription {
     sender
     message

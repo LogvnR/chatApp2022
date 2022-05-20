@@ -42,14 +42,14 @@ export type Subscription = {
   MessageSubscription?: Maybe<Array<Maybe<Message>>>;
 };
 
-export type MessageSubscriptionSubscriptionVariables = Exact<{ [key: string]: never; }>;
+export type MessagesSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MessageSubscriptionSubscription = { __typename?: 'Subscription', MessageSubscription?: Array<{ __typename?: 'Message', sender?: string | null, message?: string | null } | null> | null };
+export type MessagesSubscription = { __typename?: 'Subscription', MessageSubscription?: Array<{ __typename?: 'Message', sender?: string | null, message?: string | null } | null> | null };
 
 
-export const MessageSubscriptionDocument = gql`
-    subscription MessageSubscription {
+export const MessagesDocument = gql`
+    subscription Messages {
   MessageSubscription {
     sender
     message
@@ -58,26 +58,26 @@ export const MessageSubscriptionDocument = gql`
     `;
 
 /**
- * __useMessageSubscriptionSubscription__
+ * __useMessagesSubscription__
  *
- * To run a query within a React component, call `useMessageSubscriptionSubscription` and pass it any options that fit your needs.
- * When your component renders, `useMessageSubscriptionSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMessagesSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useMessagesSubscription` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMessageSubscriptionSubscription({
+ * const { data, loading, error } = useMessagesSubscription({
  *   variables: {
  *   },
  * });
  */
-export function useMessageSubscriptionSubscription(baseOptions?: Apollo.SubscriptionHookOptions<MessageSubscriptionSubscription, MessageSubscriptionSubscriptionVariables>) {
+export function useMessagesSubscription(baseOptions?: Apollo.SubscriptionHookOptions<MessagesSubscription, MessagesSubscriptionVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<MessageSubscriptionSubscription, MessageSubscriptionSubscriptionVariables>(MessageSubscriptionDocument, options);
+        return Apollo.useSubscription<MessagesSubscription, MessagesSubscriptionVariables>(MessagesDocument, options);
       }
-export type MessageSubscriptionSubscriptionHookResult = ReturnType<typeof useMessageSubscriptionSubscription>;
-export type MessageSubscriptionSubscriptionResult = Apollo.SubscriptionResult<MessageSubscriptionSubscription>;
+export type MessagesSubscriptionHookResult = ReturnType<typeof useMessagesSubscription>;
+export type MessagesSubscriptionResult = Apollo.SubscriptionResult<MessagesSubscription>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {
