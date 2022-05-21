@@ -35,6 +35,10 @@ export interface NexusGenObjects {
   Mutation: {};
   Query: {};
   Subscription: {};
+  Typing: { // root type
+    isTyping: boolean; // Boolean!
+    username: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -53,13 +57,19 @@ export interface NexusGenFieldTypes {
     sender: string | null; // String
   }
   Mutation: { // field return type
+    IsTypingMutation: NexusGenRootTypes['Typing']; // Typing!
     SendMessage: boolean; // Boolean!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
   }
   Subscription: { // field return type
+    IsTypingSubscription: NexusGenRootTypes['Typing'] | null; // Typing
     MessageSubscription: Array<NexusGenRootTypes['Message'] | null> | null; // [Message]
+  }
+  Typing: { // field return type
+    isTyping: boolean; // Boolean!
+    username: string; // String!
   }
 }
 
@@ -69,18 +79,28 @@ export interface NexusGenFieldTypeNames {
     sender: 'String'
   }
   Mutation: { // field return type name
+    IsTypingMutation: 'Typing'
     SendMessage: 'Boolean'
   }
   Query: { // field return type name
     ok: 'Boolean'
   }
   Subscription: { // field return type name
+    IsTypingSubscription: 'Typing'
     MessageSubscription: 'Message'
+  }
+  Typing: { // field return type name
+    isTyping: 'Boolean'
+    username: 'String'
   }
 }
 
 export interface NexusGenArgTypes {
   Mutation: {
+    IsTypingMutation: { // args
+      isTyping: boolean; // Boolean!
+      username: string; // String!
+    }
     SendMessage: { // args
       message: string; // String!
       username: string; // String!
