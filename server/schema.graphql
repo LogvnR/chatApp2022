@@ -8,6 +8,7 @@ type Message {
 }
 
 type Mutation {
+  IsTypingMutation(isTyping: Boolean!, username: String!): Typing!
   SendMessage(message: String!, username: String!): Boolean!
 }
 
@@ -16,5 +17,11 @@ type Query {
 }
 
 type Subscription {
+  IsTypingSubscription: Typing
   MessageSubscription: [Message]
+}
+
+type Typing {
+  isTyping: Boolean!
+  username: String!
 }

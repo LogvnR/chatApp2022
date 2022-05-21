@@ -23,7 +23,14 @@ export type Message = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  IsTypingMutation: Typing;
   SendMessage: Scalars['Boolean'];
+};
+
+
+export type MutationIsTypingMutationArgs = {
+  isTyping: Scalars['Boolean'];
+  username: Scalars['String'];
 };
 
 
@@ -39,8 +46,20 @@ export type Query = {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  IsTypingSubscription?: Maybe<Typing>;
   MessageSubscription?: Maybe<Array<Maybe<Message>>>;
 };
+
+export type Typing = {
+  __typename?: 'Typing';
+  isTyping: Scalars['Boolean'];
+  username: Scalars['String'];
+};
+
+export type IsTypingSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type IsTypingSubscription = { __typename?: 'Subscription', IsTypingSubscription?: { __typename?: 'Typing', username: string, isTyping: boolean } | null };
 
 export type MessagesSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
@@ -55,7 +74,45 @@ export type SendMessageMutationVariables = Exact<{
 
 export type SendMessageMutation = { __typename?: 'Mutation', SendMessage: boolean };
 
+export type SetIsTypingMutationVariables = Exact<{
+  username: Scalars['String'];
+  isTyping: Scalars['Boolean'];
+}>;
 
+
+export type SetIsTypingMutation = { __typename?: 'Mutation', IsTypingMutation: { __typename?: 'Typing', username: string, isTyping: boolean } };
+
+
+export const IsTypingDocument = gql`
+    subscription IsTyping {
+  IsTypingSubscription {
+    username
+    isTyping
+  }
+}
+    `;
+
+/**
+ * __useIsTypingSubscription__
+ *
+ * To run a query within a React component, call `useIsTypingSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useIsTypingSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIsTypingSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useIsTypingSubscription(baseOptions?: Apollo.SubscriptionHookOptions<IsTypingSubscription, IsTypingSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<IsTypingSubscription, IsTypingSubscriptionVariables>(IsTypingDocument, options);
+      }
+export type IsTypingSubscriptionHookResult = ReturnType<typeof useIsTypingSubscription>;
+export type IsTypingSubscriptionResult = Apollo.SubscriptionResult<IsTypingSubscription>;
 export const MessagesDocument = gql`
     subscription Messages {
   MessageSubscription {
@@ -118,6 +175,41 @@ export function useSendMessageMutation(baseOptions?: Apollo.MutationHookOptions<
 export type SendMessageMutationHookResult = ReturnType<typeof useSendMessageMutation>;
 export type SendMessageMutationResult = Apollo.MutationResult<SendMessageMutation>;
 export type SendMessageMutationOptions = Apollo.BaseMutationOptions<SendMessageMutation, SendMessageMutationVariables>;
+export const SetIsTypingDocument = gql`
+    mutation SetIsTyping($username: String!, $isTyping: Boolean!) {
+  IsTypingMutation(username: $username, isTyping: $isTyping) {
+    username
+    isTyping
+  }
+}
+    `;
+export type SetIsTypingMutationFn = Apollo.MutationFunction<SetIsTypingMutation, SetIsTypingMutationVariables>;
+
+/**
+ * __useSetIsTypingMutation__
+ *
+ * To run a mutation, you first call `useSetIsTypingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetIsTypingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setIsTypingMutation, { data, loading, error }] = useSetIsTypingMutation({
+ *   variables: {
+ *      username: // value for 'username'
+ *      isTyping: // value for 'isTyping'
+ *   },
+ * });
+ */
+export function useSetIsTypingMutation(baseOptions?: Apollo.MutationHookOptions<SetIsTypingMutation, SetIsTypingMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SetIsTypingMutation, SetIsTypingMutationVariables>(SetIsTypingDocument, options);
+      }
+export type SetIsTypingMutationHookResult = ReturnType<typeof useSetIsTypingMutation>;
+export type SetIsTypingMutationResult = Apollo.MutationResult<SetIsTypingMutation>;
+export type SetIsTypingMutationOptions = Apollo.BaseMutationOptions<SetIsTypingMutation, SetIsTypingMutationVariables>;
 
       export interface PossibleTypesResultData {
         possibleTypes: {
