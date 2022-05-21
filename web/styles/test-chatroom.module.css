@@ -26,3 +26,7 @@
 .error {
   color: rgb(210, 64, 64);
 }
+
+.isTypingMessage {
+  color: gray;
+}

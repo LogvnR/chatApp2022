@@ -1,9 +1,11 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
+  useIsTypingSubscription,
   useMessagesSubscription,
   useSendMessageMutation,
+  useSetIsTypingMutation,
 } from "../src/generated/graphql";
 import styles from "../styles/test-chatroom.module.css";
 
@@ -21,6 +23,7 @@ The basics of the application are being applied on this page.
 - Graphql Mutations
   - Graphql hooks created with introspection code-gen
 - React-Hook-Form best practices
+- istyping hooks + message hooks
 
 */
 
@@ -29,11 +32,25 @@ The basics of the application are being applied on this page.
     handleSubmit,
     resetField,
     getValues,
+    watch,
     formState: { errors },
   } = useForm<InputInterface>();
 
-  const { data, loading } = useMessagesSubscription();
+  const { username } = watch();
+
   const [sendMessage] = useSendMessageMutation();
+  const [setIsTyping] = useSetIsTypingMutation();
+  const { data, loading } = useMessagesSubscription();
+  const { data: typingData } = useIsTypingSubscription();
+
+  const isTyping = async (isTyping: boolean) => {
+    await setIsTyping({
+      variables: {
+        username,
+        isTyping,
+      },
+    });
+  };
 
   if (loading) {
     return (
@@ -45,8 +62,7 @@ The basics of the application are being applied on this page.
 
   return (
     <div className={styles.container}>
-      <h1>Test Chat Room</h1>
-
+      <h1>Test Chat Room </h1>
       <form
         onSubmit={handleSubmit(async ({ username, message }) => {
           await sendMessage({
@@ -68,8 +84,10 @@ The basics of the application are being applied on this page.
         <input
           placeholder="message"
           autoComplete="off"
+          onFocus={async () => isTyping(true)}
           {...register("message", {
             required: "Message is required...",
+            onBlur: async () => isTyping(false),
           })}
           type="text"
         />
@@ -79,10 +97,10 @@ The basics of the application are being applied on this page.
 
         <input type="submit" />
       </form>
-
       {data?.MessageSubscription?.map((message) => {
         return (
           <div
+            key={message?.message}
             className={
               message?.sender === getValues("username")
                 ? `${styles.self} ${styles.message}`
@@ -95,6 +113,11 @@ The basics of the application are being applied on this page.
           </div>
         );
       })}
+      {typingData?.IsTypingSubscription?.isTyping && (
+        <div className={styles.isTypingMessage}>
+          {typingData?.IsTypingSubscription?.username} is typing...
+        </div>
+      )}
     </div>
   );
 };

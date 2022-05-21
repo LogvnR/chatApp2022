@@ -1,0 +1,6 @@
+subscription IsTyping {
+  IsTypingSubscription {
+    username
+    isTyping
+  }
+}

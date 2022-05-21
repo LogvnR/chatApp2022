@@ -1,0 +1,6 @@
+mutation SetIsTyping($username: String!, $isTyping: Boolean!) {
+  IsTypingMutation(username: $username, isTyping: $isTyping) {
+    username
+    isTyping
+  }
+}
