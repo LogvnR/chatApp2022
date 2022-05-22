@@ -1,21 +1,20 @@
-import { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import Button from "../components/button/Button";
 import {
-  useIsTypingSubscription,
-  useMessagesSubscription,
   useSendMessageMutation,
   useSetIsTypingMutation,
-} from "../src/generated/graphql";
-import styles from "../styles/test-chatroom.module.css";
+  useMessagesSubscription,
+  useIsTypingSubscription,
+} from "../../src/generated/graphql";
+import Button from "../button/Button";
+import styles from "../../styles/test-chatroom.module.css";
 
 interface InputInterface {
   username: string;
   message: string;
 }
 
-const TestChatRoom: NextPage = () => {
+const Chatroom = () => {
   /* 
 Fully working example of graphql hooks + react-hook-form
 The basics of the application are being applied on this page.
@@ -123,4 +122,4 @@ The basics of the application are being applied on this page.
   );
 };
 
-export default TestChatRoom;
+export default Chatroom;

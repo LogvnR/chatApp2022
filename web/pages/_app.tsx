@@ -4,7 +4,7 @@ import { createClient } from "graphql-ws";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
 
-const wsLink =
+export const wsLink =
   process.browser &&
   new GraphQLWsLink(
     createClient({
@@ -12,9 +12,7 @@ const wsLink =
     })
   );
 
-console.log(wsLink);
-
-const client = new ApolloClient({
+export const client = new ApolloClient({
   link: wsLink as any,
   cache: new InMemoryCache(),
 });
