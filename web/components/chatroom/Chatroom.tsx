@@ -80,7 +80,9 @@ The basics of the application are being applied on this page.
           mr={10}
           placeholder="username"
           autoComplete="off"
-          {...register("username", { required: "Username is required..." })}
+          register={register("username", {
+            required: "Username is required...",
+          })}
           type="text"
         />
 
@@ -88,7 +90,7 @@ The basics of the application are being applied on this page.
           placeholder="message"
           autoComplete="off"
           onFocus={async () => isTyping(true)}
-          {...register("message", {
+          register={register("message", {
             required: "Message is required...",
             onBlur: async () => isTyping(false),
           })}

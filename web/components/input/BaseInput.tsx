@@ -10,9 +10,10 @@ interface InputProps
   mb?: number;
   ml?: number;
   mr?: number;
+  register?: any;
 }
 
-const BaseInput: FC<InputProps> = (props) => {
+const BaseInput: FC<InputProps> = ({ register, ...props }) => {
   return (
     <input
       style={{
@@ -23,6 +24,7 @@ const BaseInput: FC<InputProps> = (props) => {
       }}
       className={styles.input}
       placeholder={props.placeholder}
+      {...register}
       {...props}
     />
   );
