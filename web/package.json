@@ -20,7 +20,8 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-hook-form": "^7.31.1",
-    "ws": "^8.6.0"
+    "ws": "^8.6.0",
+    "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",
