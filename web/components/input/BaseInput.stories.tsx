@@ -1,12 +1,9 @@
 // YourComponent.stories.ts|tsx
-
 import React from "react";
 
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import Chatroom from "./Chatroom";
-import { ApolloProvider } from "@apollo/client";
-import { client } from "../../pages/_app";
+import BaseInput from "./BaseInput";
 
 //👇 This default export determines where your story goes in the story list
 export default {
@@ -14,19 +11,19 @@ export default {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: "Pages",
-  component: Chatroom,
-} as ComponentMeta<typeof Chatroom>;
+  title: "Atoms - Inputs",
+  component: BaseInput,
+} as ComponentMeta<typeof BaseInput>;
 
 //👇 We create a “template” of how args map to rendering
 // @ts-ignore
-const Template: ComponentStory<typeof Chatroom> = (args) => (
-  <ApolloProvider client={client}>
-    {/* @ts-ignore */}
-    <Chatroom {...args} />
-  </ApolloProvider>
+const Template: ComponentStory<typeof BaseInput> = (args) => (
+  <BaseInput {...args} />
 );
 
-export const ChatroomPage = Template.bind({});
+export const Input = Template.bind({});
 
-ChatroomPage.args = {};
+Input.args = {
+  /*👇 The args you need here will depend on your component */
+  placeholder: "Email",
+};

@@ -8,6 +8,7 @@ import {
 } from "../../src/generated/graphql";
 import Button from "../button/Button";
 import styles from "../../styles/test-chatroom.module.css";
+import BaseInput from "../input/BaseInput";
 
 interface InputInterface {
   username: string;
@@ -75,13 +76,15 @@ The basics of the application are being applied on this page.
           resetField("message");
         })}
       >
-        <input
+        <BaseInput
+          mr={10}
           placeholder="username"
           autoComplete="off"
           {...register("username", { required: "Username is required..." })}
           type="text"
         />
-        <input
+
+        <BaseInput
           placeholder="message"
           autoComplete="off"
           onFocus={async () => isTyping(true)}
@@ -91,6 +94,7 @@ The basics of the application are being applied on this page.
           })}
           type="text"
         />
+
         <p className={styles.error}>
           {errors.username?.message} {errors.message?.message}
         </p>

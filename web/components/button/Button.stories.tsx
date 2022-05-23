@@ -12,7 +12,7 @@ export default {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: "Button",
+  title: "Atoms - Inputs",
   component: Button,
 } as ComponentMeta<typeof Button>;
 
@@ -20,9 +20,9 @@ export default {
 // @ts-ignore
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
 
-export const PrimaryButton = Template.bind({});
+export const BaseButton = Template.bind({});
 
-PrimaryButton.args = {
+BaseButton.args = {
   /*👇 The args you need here will depend on your component */
   title: "Button",
   subtitle: "Click Here",

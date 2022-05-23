@@ -1,0 +1,13 @@
+.input {
+  padding: 8px 10px;
+  background-color: rgba(219, 229, 243, 0.466);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  transition: all;
+  transition-duration: 200ms;
+}
+
+.input:focus-within {
+  background-color: rgba(164, 192, 232, 0.293);
+}
