@@ -5,6 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import { RootStackParams } from "../App";
 import tw from "../libs/tailwind";
+import { useGlobalStore } from "../libs/useGlobalStore";
 
 interface FormData {
   username: string;
@@ -12,6 +13,7 @@ interface FormData {
 
 const WelcomeScreen = () => {
   const navigator = useNavigation<NativeStackNavigationProp<RootStackParams>>();
+  const { setUsername } = useGlobalStore();
 
   const {
     control,
@@ -46,7 +48,7 @@ const WelcomeScreen = () => {
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  style={tw`w-60 py-2 px-2 rounded  bg-white`}
+                  style={tw`w-60 py-2 px-2 rounded bg-white`}
                 />
               )}
               name="username"
@@ -60,10 +62,10 @@ const WelcomeScreen = () => {
 
           <TouchableOpacity
             onPress={handleSubmit(({ username }) => {
-              alert(`Welcome ${username}`);
+              setUsername(username);
               navigator.navigate("MessagesScreen");
             })}
-            style={tw`bg-black text-white w-2/3 py-1 rounded `}
+            style={tw`bg-black text-white w-2/3 py-2 rounded `}
           >
             <Text style={tw`text-white text-lg text-center`}>ENTER</Text>
           </TouchableOpacity>
