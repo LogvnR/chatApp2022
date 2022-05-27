@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "twrnc": "^3.0.2-beta.1"
+  }
+}
