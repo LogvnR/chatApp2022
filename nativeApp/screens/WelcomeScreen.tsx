@@ -26,7 +26,7 @@ const WelcomeScreen = () => {
   });
 
   return (
-    <View style={tw`h-full flex justify-center `}>
+    <View style={tw`flex justify-center h-full `}>
       <View style={tw`px-5`}>
         <View
           style={tw`bg-slate-300 justify-between py-4 items-center h-[85] mb-24 rounded`}
@@ -45,16 +45,17 @@ const WelcomeScreen = () => {
               }}
               render={({ field: { onChange, onBlur, value } }) => (
                 <TextInput
+                  placeholder="Username"
                   onBlur={onBlur}
                   onChangeText={onChange}
                   value={value}
-                  style={tw`w-60 py-2 px-2 rounded bg-white`}
+                  style={tw`px-2 py-2 bg-white rounded w-60`}
                 />
               )}
               name="username"
             />
             {errors.username && (
-              <Text style={tw`text-red-600 mt-2 `}>
+              <Text style={tw`mt-2 text-red-600 `}>
                 Your Username is Required...
               </Text>
             )}
@@ -65,9 +66,9 @@ const WelcomeScreen = () => {
               setUsername(username);
               navigator.navigate("MessagesScreen");
             })}
-            style={tw`bg-black text-white w-2/3 py-2 rounded `}
+            style={tw`w-2/3 py-2 text-white bg-black rounded `}
           >
-            <Text style={tw`text-white text-lg text-center`}>ENTER</Text>
+            <Text style={tw`text-lg text-center text-white`}>ENTER</Text>
           </TouchableOpacity>
         </View>
       </View>
