@@ -4,6 +4,10 @@ import { createClient } from "graphql-ws";
 import type { AppProps } from "next/app";
 import "../styles/globals.css";
 
+/**
+ * This is how you implement graphql subscriptions in a nextjs app.
+ */
+
 export const wsLink =
   process.browser &&
   new GraphQLWsLink(

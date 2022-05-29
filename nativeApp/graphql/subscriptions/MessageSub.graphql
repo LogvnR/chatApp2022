@@ -1,0 +1,6 @@
+subscription Messages {
+  MessageSubscription {
+    sender
+    message
+  }
+}
