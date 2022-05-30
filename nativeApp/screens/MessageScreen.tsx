@@ -21,8 +21,8 @@ const MessageScreen = () => {
 
   const {
     control,
-    handleSubmit,
     formState: { errors },
+    resetField,
   } = useForm<FormData>({
     defaultValues: {
       message: "",
@@ -75,21 +75,19 @@ const MessageScreen = () => {
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
-            sendMessage={() =>
-              sendMessage({
+            sendMessage={async () => {
+              await sendMessage({
                 variables: {
                   username,
                   message: value,
                 },
-              })
-            }
+              });
+              resetField("message");
+            }}
           />
         )}
         name="message"
       />
-      {errors.message && (
-        <Text style={tw`mt-2 text-red-600 `}>Your Username is Required...</Text>
-      )}
     </View>
   );
 };
