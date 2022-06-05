@@ -1,14 +1,12 @@
 import { NextPage } from "next";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import Button from "../components/button/Button";
 import {
   useIsTypingSubscription,
   useMessagesSubscription,
   useSendMessageMutation,
   useSetIsTypingMutation,
 } from "../src/generated/graphql";
-import styles from "../styles/test-chatroom.module.css";
 
 interface InputInterface {
   username: string;
@@ -55,16 +53,19 @@ The basics of the application are being applied on this page.
 
   if (loading) {
     return (
-      <div className={styles.loading}>
-        <h1 className={styles.loading__header}>Loading...</h1>
+      <div className="">
+        <h1 className="">Loading...</h1>
       </div>
     );
   }
 
   return (
-    <div className={styles.container}>
-      <h1>Test Chat Room </h1>
+    <div className="max-w-3xl px-4 mx-auto ">
+      <h1 className="mt-5 text-3xl font-extrabold text-center">
+        Test Chat Room{" "}
+      </h1>
       <form
+        className="flex flex-col items-center gap-2 mt-8 sm:items-start"
         onSubmit={handleSubmit(async ({ username, message }) => {
           await sendMessage({
             variables: {
@@ -77,12 +78,14 @@ The basics of the application are being applied on this page.
         })}
       >
         <input
+          className="w-4/6 px-2 py-1 mx-1 transition-all duration-200 border rounded-sm outline-none sm:w-60 focus-within:ring ring-amber-400"
           placeholder="username"
           autoComplete="off"
           {...register("username", { required: "Username is required..." })}
           type="text"
         />
         <input
+          className="w-4/6 px-2 py-1 mx-1 transition-all duration-200 border rounded-sm outline-none sm:w-60 focus-within:ring ring-amber-400"
           placeholder="message"
           autoComplete="off"
           onFocus={async () => isTyping(true)}
@@ -92,33 +95,40 @@ The basics of the application are being applied on this page.
           })}
           type="text"
         />
-        <p className={styles.error}>
-          {errors.username?.message} {errors.message?.message}
-        </p>
+        {errors && (
+          <p className="text-red-500">
+            {errors.username?.message} {errors.message?.message}
+          </p>
+        )}
 
-        <Button title="Submit" subtitle="Send Your Message" type="submit" />
+        <button className="bg-[#e3a83a] text-white rounded mx-auto w-32 px-2 py-1 sm:mx-0  hover:bg-[#eebf68] outline-dashed">
+          <p> Submit</p>
+          <p className="text-sm">Send Message</p>
+        </button>
       </form>
-      {data?.MessageSubscription?.map((message) => {
-        return (
-          <div
-            key={message?.message}
-            className={
-              message?.sender === getValues("username")
-                ? `${styles.self} ${styles.message}`
-                : styles.message
-            }
-          >
-            <div>
-              <b>{message?.sender}:</b> {message?.message}
+      <div className="flex flex-col gap-1 mt-5">
+        {data?.MessageSubscription?.map((message) => {
+          return (
+            <div
+              key={message?.message}
+              className={
+                message?.sender === getValues("username")
+                  ? "place-self-end"
+                  : ""
+              }
+            >
+              <div>
+                <b>{message?.sender}:</b> {message?.message}
+              </div>
             </div>
+          );
+        })}
+        {typingData?.IsTypingSubscription?.isTyping && (
+          <div className="text-sm text-black/40">
+            {typingData?.IsTypingSubscription?.username} is typing...
           </div>
-        );
-      })}
-      {typingData?.IsTypingSubscription?.isTyping && (
-        <div className={styles.isTypingMessage}>
-          {typingData?.IsTypingSubscription?.username} is typing...
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
