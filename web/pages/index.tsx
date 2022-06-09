@@ -1,4 +1,5 @@
 import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useForm } from 'react-hook-form';
@@ -17,11 +18,13 @@ const Home: NextPage = () => {
     formState: { errors },
   } = useForm<FormState>();
   const { setUsername } = useStore();
+  const router = useRouter();
 
   return (
     <form
       onSubmit={handleSubmit(({ username }) => {
         setUsername(username);
+        router.push('/test-chatroom');
       })}
     >
       <div className="flex items-center justify-center w-full h-screen bg-white">
