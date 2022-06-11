@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
+import MessagesCell from "../components/cells/MessagesCell/MessagesCell";
 import { useStore } from "../helpers/useStore";
 import {
   useIsTypingSubscription,
-  useMessagesSubscription,
   useSendMessageMutation,
   useSetIsTypingMutation,
 } from "../src/generated/graphql";
@@ -35,12 +35,8 @@ The basics of the application are being applied on this page.
   } = useForm<InputInterface>();
 
   const { username: globalUsername } = useStore();
-
-  // const { username } = watch();
-
   const [sendMessage] = useSendMessageMutation();
   const [setIsTyping] = useSetIsTypingMutation();
-  const { data, loading } = useMessagesSubscription();
   const { data: typingData } = useIsTypingSubscription();
 
   const isTyping = async (isTyping: boolean) => {
@@ -52,18 +48,10 @@ The basics of the application are being applied on this page.
     });
   };
 
-  if (loading) {
-    return (
-      <div className="">
-        <h1 className="">Loading...</h1>
-      </div>
-    );
-  }
-
   return (
     <div className="max-w-3xl px-4 mx-auto ">
       <h1 className="mt-5 text-3xl font-extrabold text-center">
-        Test Chat Room{" "}
+        Test Chat Room
       </h1>
       <form
         className="flex flex-col items-center gap-2 mt-8 sm:items-start"
@@ -96,27 +84,12 @@ The basics of the application are being applied on this page.
           <p className="text-sm">Send Message</p>
         </button>
       </form>
-      <div className="flex flex-col gap-1 mt-5">
-        {data?.MessageSubscription?.map((message) => {
-          return (
-            <div
-              key={message?.message}
-              className={
-                message?.sender === globalUsername ? "place-self-end" : ""
-              }
-            >
-              <div>
-                <b>{message?.sender}:</b> {message?.message}
-              </div>
-            </div>
-          );
-        })}
-        {typingData?.IsTypingSubscription?.isTyping && (
-          <div className="text-sm text-black/40">
-            {typingData?.IsTypingSubscription?.username} is typing...
-          </div>
-        )}
-      </div>
+      <MessagesCell />
+      {typingData?.IsTypingSubscription?.isTyping && (
+        <div className="text-sm text-black/40">
+          {typingData?.IsTypingSubscription?.username} is typing...
+        </div>
+      )}
     </div>
   );
 };
