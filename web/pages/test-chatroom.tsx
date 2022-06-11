@@ -10,17 +10,15 @@ interface InputInterface {
 }
 
 const TestChatRoom: NextPage = () => {
-  /* 
-Fully working example of graphql hooks + react-hook-form
-The basics of the application are being applied on this page.
-
-- Websocket subscription
-- Graphql Mutations
-  - Graphql hooks created with introspection code-gen
-- React-Hook-Form best practices
-- istyping hooks + message hooks
-
-*/
+  /**
+   * Fully working example of graphql hooks + react-hook-form
+   * The basics of the application are being applied on this page.
+   * - Websocket subscription
+   * - Graphql Mutations
+   *  - Graphql hooks created with introspection code-gen
+   * - React-Hook-Form best practices
+   * - istyping hooks + message hooks
+   */
 
   const { isTyping } = useIsTyping();
   const { sendMessage } = useSendMessage();
@@ -41,7 +39,6 @@ The basics of the application are being applied on this page.
         className="flex flex-col items-center gap-2 mt-8 sm:items-start"
         onSubmit={handleSubmit(async ({ message }) => {
           await sendMessage(message);
-
           resetField("message");
         })}
       >
@@ -66,7 +63,6 @@ The basics of the application are being applied on this page.
 
       {/**
        *  Seperate Components for Fetching
-       *
        *  Following the structure of RedwoodJS — Making components for fetching and keeping the state scoped to those components seems like the best option here.
        */}
 
