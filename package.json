@@ -1,5 +1,12 @@
 {
-  "dependencies": {
-    "twrnc": "^3.0.2-beta.1"
+  "name": "chat-app",
+  "private": true,
+  "workspaces": [
+    "server",
+    "web",
+    "nativeApp"
+  ],
+  "scripts": {
+    "dev": "yarn workspace server dev & yarn workspace web dev"
   }
 }
