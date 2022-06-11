@@ -1,10 +1,10 @@
-import type { NextPage } from 'next';
-import Head from 'next/head';
-import Image from 'next/image';
-import { useForm } from 'react-hook-form';
-import styles from '../styles/Home.module.css';
-import { useStore } from '../helpers/useStore';
-import PlainButton from '../components/PlainButton/PlainButton';
+import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
+import { useForm } from "react-hook-form";
+import styles from "../styles/Home.module.css";
+import { useStore } from "../helpers/useStore";
+import PlainButton from "../components/PlainButton/PlainButton";
 
 interface FormState {
   username: string;
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
           <link rel="icon" href="/favicon.ico" />
         </Head>
 
-        <main className="w-[75%] max-w-{300px} h-[45%] px-4 py-8 rounded-md bg-gray-300 flex flex-col justify-between items-center">
+        <main className="w-[75%] max-w-[300px] h-[45%] px-4 py-8 rounded-md bg-gray-300 flex flex-col justify-between items-center">
           <h4 className="m-0 font-bold font-quicksand">ChatApp</h4>
           <div className="flex flex-col items-center justify-center w-full gap-2">
             <h1 className="m-0 text-lg font-bold text-center font-merriweather">
@@ -46,10 +46,10 @@ const Home: NextPage = () => {
               autoComplete="off"
               className={
                 errors.username
-                  ? 'border w-full p-1 outline-none rounded-sm focus-within:ring transition-all duration-200 ring ring-red-500'
-                  : 'border w-full p-1 outline-none rounded-sm focus-within:ring transition-all duration-200'
+                  ? "border w-full p-1 outline-none rounded-sm focus-within:ring transition-all duration-200 ring ring-red-500"
+                  : "border w-full p-1 outline-none rounded-sm focus-within:ring transition-all duration-200"
               }
-              {...register('username', { required: 'Username is required...' })}
+              {...register("username", { required: "Username is required..." })}
               type="text"
             />
             {errors.username && (
@@ -58,7 +58,7 @@ const Home: NextPage = () => {
               </p>
             )}
           </div>
-          <button className="w-full py-3 tracking-wider text-white capitalize bg-black rounded font-roboto active:bg-slate-900">
+          <button className="w-full py-3 tracking-wider text-white capitalize bg-black rounded font-roboto hover:bg-slate-800 active:bg-slate-900">
             ENTER
           </button>
         </main>
