@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
+import IsTypingCell from "../components/cells/IsTypingCell/IsTypingCell";
 import MessagesCell from "../components/cells/MessagesCell/MessagesCell";
 import { useStore } from "../helpers/useStore";
 import {
-  useIsTypingSubscription,
   useSendMessageMutation,
   useSetIsTypingMutation,
 } from "../src/generated/graphql";
@@ -29,15 +29,12 @@ The basics of the application are being applied on this page.
     register,
     handleSubmit,
     resetField,
-    getValues,
-    watch,
     formState: { errors },
   } = useForm<InputInterface>();
 
   const { username: globalUsername } = useStore();
   const [sendMessage] = useSendMessageMutation();
   const [setIsTyping] = useSetIsTypingMutation();
-  const { data: typingData } = useIsTypingSubscription();
 
   const isTyping = async (isTyping: boolean) => {
     await setIsTyping({
@@ -85,11 +82,7 @@ The basics of the application are being applied on this page.
         </button>
       </form>
       <MessagesCell />
-      {typingData?.IsTypingSubscription?.isTyping && (
-        <div className="text-sm text-black/40">
-          {typingData?.IsTypingSubscription?.username} is typing...
-        </div>
-      )}
+      <IsTypingCell />
     </div>
   );
 };
