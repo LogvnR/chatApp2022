@@ -1,12 +1,15 @@
-import { NextPage } from "next";
-import React from "react";
-import { useForm } from "react-hook-form";
+import { NextPage } from 'next';
+import React from 'react';
+
+import { useStore } from '../helpers/useStore';
+
+import { useForm } from 'react-hook-form';
 import {
   useIsTypingSubscription,
   useMessagesSubscription,
   useSendMessageMutation,
   useSetIsTypingMutation,
-} from "../src/generated/graphql";
+} from '../src/generated/graphql';
 
 interface InputInterface {
   username: string;
@@ -62,7 +65,7 @@ The basics of the application are being applied on this page.
   return (
     <div className="max-w-3xl px-4 mx-auto ">
       <h1 className="mt-5 text-3xl font-extrabold text-center">
-        Test Chat Room{" "}
+        Test Chat Room{' '}
       </h1>
       <form
         className="flex flex-col items-center gap-2 mt-8 sm:items-start"
@@ -74,14 +77,14 @@ The basics of the application are being applied on this page.
             },
           });
 
-          resetField("message");
+          resetField('message');
         })}
       >
         <input
           className="w-4/6 px-2 py-1 mx-1 transition-all duration-200 border rounded-sm outline-none sm:w-60 focus-within:ring ring-amber-400"
           placeholder="username"
           autoComplete="off"
-          {...register("username", { required: "Username is required..." })}
+          {...register('username', { required: 'Username is required...' })}
           type="text"
         />
         <input
@@ -89,8 +92,8 @@ The basics of the application are being applied on this page.
           placeholder="message"
           autoComplete="off"
           onFocus={async () => isTyping(true)}
-          {...register("message", {
-            required: "Message is required...",
+          {...register('message', {
+            required: 'Message is required...',
             onBlur: async () => isTyping(false),
           })}
           type="text"
@@ -112,9 +115,9 @@ The basics of the application are being applied on this page.
             <div
               key={message?.message}
               className={
-                message?.sender === getValues("username")
-                  ? "place-self-end"
-                  : ""
+                message?.sender === getValues('username')
+                  ? 'place-self-end'
+                  : ''
               }
             >
               <div>
