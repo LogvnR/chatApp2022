@@ -10,7 +10,11 @@ export const MessagesCell = () => {
   }
 
   if (error) {
-    return <div>Uh Oh...</div>;
+    return (
+      <div className="mt-20 text-3xl font-light text-center text-red-600 font-roboto animate-pulse">
+        Cannot Connect to Server...
+      </div>
+    );
   }
 
   return (
