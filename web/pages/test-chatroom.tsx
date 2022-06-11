@@ -63,7 +63,9 @@ const TestChatRoom: NextPage = () => {
 
       {/**
        *  Seperate Components for Fetching
-       *  Following the structure of RedwoodJS — Making components for fetching and keeping the state scoped to those components seems like the best option here.
+       *  Following the structure of RedwoodJS — Making components
+       * for fetching and keeping the state scoped to those
+       * components seems like the best option here.
        */}
 
       <MessagesCell />

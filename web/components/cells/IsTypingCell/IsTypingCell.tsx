@@ -6,7 +6,7 @@ const IsTypingCell = () => {
   return (
     <>
       {typingData?.IsTypingSubscription?.isTyping && (
-        <div className="text-sm text-black/40">
+        <div className="text-sm text-black/40 animate-pulse">
           {typingData?.IsTypingSubscription?.username} is typing...
         </div>
       )}
