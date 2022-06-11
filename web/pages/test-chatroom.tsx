@@ -2,11 +2,8 @@ import { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import IsTypingCell from "../components/cells/IsTypingCell/IsTypingCell";
 import MessagesCell from "../components/cells/MessagesCell/MessagesCell";
-import {
-  useSendMessageMutation,
-  useSetIsTypingMutation,
-} from "../graphql/generated/graphql";
-import { useStore } from "../helpers/useStore";
+import { useIsTyping } from "../hooks/useIsTyping";
+import { useSendMessage } from "../hooks/useSendMessage";
 
 interface InputInterface {
   message: string;
@@ -25,25 +22,15 @@ The basics of the application are being applied on this page.
 
 */
 
+  const { isTyping } = useIsTyping();
+  const { sendMessage } = useSendMessage();
+
   const {
     register,
     handleSubmit,
     resetField,
     formState: { errors },
   } = useForm<InputInterface>();
-
-  const { username: globalUsername } = useStore();
-  const [sendMessage] = useSendMessageMutation();
-  const [setIsTyping] = useSetIsTypingMutation();
-
-  const isTyping = async (isTyping: boolean) => {
-    await setIsTyping({
-      variables: {
-        username: globalUsername,
-        isTyping,
-      },
-    });
-  };
 
   return (
     <div className="max-w-3xl px-4 mx-auto ">
@@ -53,12 +40,7 @@ The basics of the application are being applied on this page.
       <form
         className="flex flex-col items-center gap-2 mt-8 sm:items-start"
         onSubmit={handleSubmit(async ({ message }) => {
-          await sendMessage({
-            variables: {
-              username: globalUsername,
-              message,
-            },
-          });
+          await sendMessage(message);
 
           resetField("message");
         })}
@@ -81,6 +63,13 @@ The basics of the application are being applied on this page.
           <p className="text-sm">Send Message</p>
         </button>
       </form>
+
+      {/**
+       *  Seperate Components for Fetching
+       *
+       *  Following the structure of RedwoodJS — Making components for fetching and keeping the state scoped to those components seems like the best option here.
+       */}
+
       <MessagesCell />
       <IsTypingCell />
     </div>
