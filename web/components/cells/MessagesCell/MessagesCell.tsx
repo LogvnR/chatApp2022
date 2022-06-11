@@ -1,5 +1,5 @@
+import { useMessagesSubscription } from "../../../graphql/generated/graphql";
 import { useStore } from "../../../helpers/useStore";
-import { useMessagesSubscription } from "../../../src/generated/graphql";
 
 export const MessagesCell = () => {
   const { data, loading, error } = useMessagesSubscription();
@@ -18,7 +18,7 @@ export const MessagesCell = () => {
   }
 
   return (
-    <div className="flex flex-col gap-1 mt-5">
+    <div className="flex flex-col gap-1 mt-5 text-roboto">
       {data?.MessageSubscription?.map((message, i) => {
         return (
           <div

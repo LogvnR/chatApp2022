@@ -1,5 +1,5 @@
 import React from "react";
-import { useIsTypingSubscription } from "../../../src/generated/graphql";
+import { useIsTypingSubscription } from "../../../graphql/generated/graphql";
 
 const IsTypingCell = () => {
   const { data: typingData } = useIsTypingSubscription();

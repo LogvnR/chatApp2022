@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ApolloProvider } from "@apollo/client";
-import { client } from "../../../pages/_app";
+import { client, StylesProvider } from "../../../pages/_app";
 import MessagesCell from "./MessagesCell";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -16,9 +16,11 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof MessagesCell> = (args) => (
-  <ApolloProvider client={client}>
-    <MessagesCell />
-  </ApolloProvider>
+  <StylesProvider>
+    <ApolloProvider client={client}>
+      <MessagesCell />
+    </ApolloProvider>
+  </StylesProvider>
 );
 
 export const Primary = Template.bind({});

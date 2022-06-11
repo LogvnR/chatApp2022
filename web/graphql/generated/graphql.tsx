@@ -56,16 +56,6 @@ export type Typing = {
   username: Scalars['String'];
 };
 
-export type IsTypingSubscriptionVariables = Exact<{ [key: string]: never; }>;
-
-
-export type IsTypingSubscription = { __typename?: 'Subscription', IsTypingSubscription?: { __typename?: 'Typing', username: string, isTyping: boolean } | null };
-
-export type MessagesSubscriptionVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MessagesSubscription = { __typename?: 'Subscription', MessageSubscription?: Array<{ __typename?: 'Message', sender?: string | null, message?: string | null } | null> | null };
-
 export type SendMessageMutationVariables = Exact<{
   username: Scalars['String'];
   message: Scalars['String'];
@@ -82,67 +72,17 @@ export type SetIsTypingMutationVariables = Exact<{
 
 export type SetIsTypingMutation = { __typename?: 'Mutation', IsTypingMutation: { __typename?: 'Typing', username: string, isTyping: boolean } };
 
+export type IsTypingSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export const IsTypingDocument = gql`
-    subscription IsTyping {
-  IsTypingSubscription {
-    username
-    isTyping
-  }
-}
-    `;
 
-/**
- * __useIsTypingSubscription__
- *
- * To run a query within a React component, call `useIsTypingSubscription` and pass it any options that fit your needs.
- * When your component renders, `useIsTypingSubscription` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useIsTypingSubscription({
- *   variables: {
- *   },
- * });
- */
-export function useIsTypingSubscription(baseOptions?: Apollo.SubscriptionHookOptions<IsTypingSubscription, IsTypingSubscriptionVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<IsTypingSubscription, IsTypingSubscriptionVariables>(IsTypingDocument, options);
-      }
-export type IsTypingSubscriptionHookResult = ReturnType<typeof useIsTypingSubscription>;
-export type IsTypingSubscriptionResult = Apollo.SubscriptionResult<IsTypingSubscription>;
-export const MessagesDocument = gql`
-    subscription Messages {
-  MessageSubscription {
-    sender
-    message
-  }
-}
-    `;
+export type IsTypingSubscription = { __typename?: 'Subscription', IsTypingSubscription?: { __typename?: 'Typing', username: string, isTyping: boolean } | null };
 
-/**
- * __useMessagesSubscription__
- *
- * To run a query within a React component, call `useMessagesSubscription` and pass it any options that fit your needs.
- * When your component renders, `useMessagesSubscription` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMessagesSubscription({
- *   variables: {
- *   },
- * });
- */
-export function useMessagesSubscription(baseOptions?: Apollo.SubscriptionHookOptions<MessagesSubscription, MessagesSubscriptionVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useSubscription<MessagesSubscription, MessagesSubscriptionVariables>(MessagesDocument, options);
-      }
-export type MessagesSubscriptionHookResult = ReturnType<typeof useMessagesSubscription>;
-export type MessagesSubscriptionResult = Apollo.SubscriptionResult<MessagesSubscription>;
+export type MessagesSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type MessagesSubscription = { __typename?: 'Subscription', MessageSubscription?: Array<{ __typename?: 'Message', sender?: string | null, message?: string | null } | null> | null };
+
+
 export const SendMessageDocument = gql`
     mutation SendMessage($username: String!, $message: String!) {
   SendMessage(username: $username, message: $message)
@@ -210,14 +150,63 @@ export function useSetIsTypingMutation(baseOptions?: Apollo.MutationHookOptions<
 export type SetIsTypingMutationHookResult = ReturnType<typeof useSetIsTypingMutation>;
 export type SetIsTypingMutationResult = Apollo.MutationResult<SetIsTypingMutation>;
 export type SetIsTypingMutationOptions = Apollo.BaseMutationOptions<SetIsTypingMutation, SetIsTypingMutationVariables>;
+export const IsTypingDocument = gql`
+    subscription IsTyping {
+  IsTypingSubscription {
+    username
+    isTyping
+  }
+}
+    `;
 
-      export interface PossibleTypesResultData {
-        possibleTypes: {
-          [key: string]: string[]
-        }
+/**
+ * __useIsTypingSubscription__
+ *
+ * To run a query within a React component, call `useIsTypingSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useIsTypingSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useIsTypingSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useIsTypingSubscription(baseOptions?: Apollo.SubscriptionHookOptions<IsTypingSubscription, IsTypingSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<IsTypingSubscription, IsTypingSubscriptionVariables>(IsTypingDocument, options);
       }
-      const result: PossibleTypesResultData = {
-  "possibleTypes": {}
-};
-      export default result;
-    
+export type IsTypingSubscriptionHookResult = ReturnType<typeof useIsTypingSubscription>;
+export type IsTypingSubscriptionResult = Apollo.SubscriptionResult<IsTypingSubscription>;
+export const MessagesDocument = gql`
+    subscription Messages {
+  MessageSubscription {
+    sender
+    message
+  }
+}
+    `;
+
+/**
+ * __useMessagesSubscription__
+ *
+ * To run a query within a React component, call `useMessagesSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useMessagesSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMessagesSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useMessagesSubscription(baseOptions?: Apollo.SubscriptionHookOptions<MessagesSubscription, MessagesSubscriptionVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<MessagesSubscription, MessagesSubscriptionVariables>(MessagesDocument, options);
+      }
+export type MessagesSubscriptionHookResult = ReturnType<typeof useMessagesSubscription>;
+export type MessagesSubscriptionResult = Apollo.SubscriptionResult<MessagesSubscription>;

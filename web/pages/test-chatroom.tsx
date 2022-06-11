@@ -2,11 +2,11 @@ import { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import IsTypingCell from "../components/cells/IsTypingCell/IsTypingCell";
 import MessagesCell from "../components/cells/MessagesCell/MessagesCell";
-import { useStore } from "../helpers/useStore";
 import {
   useSendMessageMutation,
   useSetIsTypingMutation,
-} from "../src/generated/graphql";
+} from "../graphql/generated/graphql";
+import { useStore } from "../helpers/useStore";
 
 interface InputInterface {
   message: string;
@@ -47,7 +47,7 @@ The basics of the application are being applied on this page.
 
   return (
     <div className="max-w-3xl px-4 mx-auto ">
-      <h1 className="mt-5 text-3xl font-extrabold text-center">
+      <h1 className="mt-5 text-3xl font-extrabold text-center font-roboto ">
         Test Chat Room
       </h1>
       <form
